@@ -54,9 +54,6 @@ import {
         {/* タイトル下の横線 */}
         <Divider />
 
-        {/*
-          stylesの適用
-        */}
         <CardHeader
           className={styles.paddingHorizontalLess}
           avatar={<Avatar />}
@@ -64,7 +61,6 @@ import {
           subheader="104K subscribers"
         />
 
-        {/* 説明文エリア */}
         <CardContent className={styles.descPadding}>
           Find your absolutely beautiful and serene place and listen to nature
           sounds, birds signing and relaxing water sounds with breathtaking views
