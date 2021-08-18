@@ -1,10 +1,18 @@
 import { Outlet } from "react-router-dom";
+import { DashboardHeader } from "../../templates/DashboardHeader";
+
+import useStyles from "./styles";
 
 export const SideLessHomeLayout = () => {
+
+  const styles = useStyles();
+
   return (
-    <div>
-      <h1>Dashboard</h1>
-      <Outlet />
+    <div className={styles.root}>
+      <DashboardHeader />
+      <div className={styles.main}>
+        <Outlet />
+      </div>
     </div>
   );
 };
