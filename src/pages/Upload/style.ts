@@ -1,7 +1,8 @@
 import { makeStyles } from "@material-ui/core";
 
 export default makeStyles({
-  root: {
-    maxWidth: "100%",
+  body: {
+    marginTop: 40,
+    marginBottom: 40,
   },
 });

@@ -1,9 +1,8 @@
 import { Container, Grid } from "@material-ui/core";
-import { VideoCard } from "../../compoennts/VideoCard";
+import { VideoCard } from "../../components/VideoCard";
 
 export const Home = () => {
   return (
-    // 全ての要素をContainerで囲むことで、デザインが「整う」
     <Container>
 
       <Grid container spacing={2}>

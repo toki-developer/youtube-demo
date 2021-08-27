@@ -1,28 +1,40 @@
 import { Navigate, useRoutes } from "react-router-dom";
-
-// 下記のファイルはまだ作成されていないので、次項で作成する。
 import { HomeLayout } from "./layouts/Home";
 import { SideLessHomeLayout } from "./layouts/SideLessHome";
 import { SimpleLayout } from "./layouts/Simple";
 import { Home } from "./pages/Home";
+import { Upload } from "./pages/Upload";
 import { Watch } from "./pages/Watch";
+import { Login } from "./pages/Login";
+import { Signup } from "./pages/Signup";
+
+// <ForgetPassForm>import
+import { ForgetPassForm } from "./pages/ForgetPassForm";
 
 export const RootRouter = () => {
   return useRoutes([
     {
       element: <HomeLayout />,
-      children: [{ path: "/", element: <Home /> }],
+      children: [
+        { path: "/", element: <Home /> },
+        { path: "upload", element: <Upload /> },
+      ],
     },
+
     {
       element: <SideLessHomeLayout />,
-      children: [{ path: "watch/:videId", element: <Watch /> }],
+      children: [
+        { path: "watch", element: <Navigate to="/" /> },
+        { path: "watch/:videoId", element: <Watch /> },
+      ],
     },
+
     {
       element: <SimpleLayout />,
       children: [
-        { path: "login", element: <div>ログイン</div> },
-        { path: "signup", element: <div>新規作成</div> },
-        { path: "forget", element: <div>パスワードリセット</div> },
+        { path: "login", element: <Login /> },
+        { path: "signup", element: <Signup /> },
+        { path: "forget", element: <ForgetPassForm /> },
         { path: "404", element: <div>Not Found</div> },
         { path: "*", element: <Navigate to="/404" /> },
       ],
