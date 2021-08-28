@@ -1,7 +1,8 @@
-import { AppBar, Avatar, Grid, IconButton, Toolbar } from "@material-ui/core";
+import { AppBar, Avatar, IconButton, Toolbar, Typography, } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import VideoCallIcon from "@material-ui/icons/VideoCall";
 import { Logo } from "../../components/Logo";
+import { useUserByIdQuery } from "../../utils/graphql/generated";
 import { SearchBar } from "./SearchBar";
 
 // export defaultしているので、import側でuseStylesと命名します。
@@ -12,6 +13,10 @@ export const DashboardHeader = () => {
   // 一度、useStylesを実行して、CSSを生成します。
   const styles = useStyles();
 
+  const { data } = useUserByIdQuery({
+    variables: { id: "id1" },
+  });
+  console.log(data)
   return (
     // color="inherit" : 背景を白色に
     // elevation={0} : 影(box-shadow)を無くす
@@ -41,13 +46,10 @@ export const DashboardHeader = () => {
         */}
         <SearchBar />
 
-        {/*
-          2つの<IconButton>を<div>で囲み、<div>にflexを付与
-        */}
         <div className={styles.flex}>
-          {/*
-          新規動画作成のアイコンボタンを追加
-        */}
+          <IconButton>
+            <Typography>{data?.users_by_pk?.name}</Typography>
+          </IconButton>
           <IconButton>
             <VideoCallIcon />
           </IconButton>
