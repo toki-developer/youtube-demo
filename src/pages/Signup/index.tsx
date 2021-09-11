@@ -1,28 +1,39 @@
 import { Button, Card, TextField, Typography } from "@material-ui/core";
 import { Logo } from "../../components/Logo";
+import { useSignup } from "../../hooks/Authentication/useSignup";
 import useStyles from "./style";
 
 export const Signup = () => {
   const styles = useStyles();
+  const { ref, error, loading, signup } = useSignup();
+
   return (
     <Card className={styles.root} variant="outlined">
-      {/* ロゴコンポーネント */}
       <div className={`${styles.logo} ${styles.margin}`}>
         <Logo />
       </div>
 
-      {/* タイトルコンポーネント */}
       <Typography className={styles.margin} component="h1" variant="h5">
         新規アカウント登録
       </Typography>
 
-      {/* 名前フィールド */}
+      {error.has("main") && (
+        <Typography className={styles.margin} color="error">
+          {error.get("main")}
+        </Typography>
+      )}
+
       <label className={`${styles.label} ${styles.margin}`}>
         <Typography>名前</Typography>
-        <TextField required size="small" fullWidth variant="outlined" />
+        <TextField
+          required size="small"
+          fullWidth variant="outlined"
+          inputRef={ref.nameRef}
+          error={error.has("name")}
+          helperText={error.has("name") ? error.get("name") : ""}
+        />
       </label>
 
-      {/* メールアドレスフィールド */}
       <label className={`${styles.label} ${styles.margin}`}>
         <Typography>メールアドレス</Typography>
         <TextField
@@ -31,10 +42,12 @@ export const Signup = () => {
           size="small"
           fullWidth
           variant="outlined"
+          inputRef={ref.emailRef}
+          error={error.has("email")}
+          helperText={error.has("email") ? error.get("email") : ""}
         />
       </label>
 
-      {/* パスワードフィールド */}
       <label className={`${styles.label} ${styles.margin}`}>
         <Typography>パスワード</Typography>
         <TextField
@@ -43,18 +56,25 @@ export const Signup = () => {
           size="small"
           fullWidth
           variant="outlined"
+          inputRef={ref.passwordRef}
+          error={error.has("password")}
+          helperText={error.has("password") ? error.get("password") : ""}
         />
       </label>
 
-      {/* Submitボタン */}
       <div className={styles.margin}>
-        <Button variant="contained" color="primary">
-          新規作成
+        <Button
+          variant="contained"
+          color="primary"
+          disabled={loading}
+          onClick={signup}
+        >
+          {loading ? "アカウント作成中" : "新規作成"}
         </Button>
       </div>
 
       <div>
-        <Button href="#link" color="primary">
+        <Button href="/login" color="primary">
           ログインはこちら
         </Button>
       </div>
