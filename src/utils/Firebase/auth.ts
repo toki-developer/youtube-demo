@@ -15,7 +15,7 @@ export type FireSignupType = {
   password: string;
 };
 export const signup = ({ email, password }: FireSignupType) => {
-  fireAuth.createUserWithEmailAndPassword(email, password);
+  return fireAuth.createUserWithEmailAndPassword(email, password);
 };
 
 //signout
