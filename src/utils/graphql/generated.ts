@@ -724,6 +724,16 @@ export type Videos_Variance_Fields = {
   duration?: Maybe<Scalars['Float']>;
 };
 
+export type InsertUserMutationVariables = Exact<{
+  id: Scalars['String'];
+  name: Scalars['String'];
+  email: Scalars['String'];
+  profile_photo_url?: Maybe<Scalars['String']>;
+}>;
+
+
+export type InsertUserMutation = { __typename?: 'mutation_root', insert_users_one?: Maybe<{ __typename?: 'users', id: string, name: string, email: string, profile_photo_url: string, created_at: any, updated_at: any }> };
+
 export type UserByIdQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
@@ -732,6 +742,49 @@ export type UserByIdQueryVariables = Exact<{
 export type UserByIdQuery = { __typename?: 'query_root', users_by_pk?: Maybe<{ __typename?: 'users', id: string, name: string, email: string, profile_photo_url: string, created_at: any, updated_at: any }> };
 
 
+export const InsertUserDocument = gql`
+    mutation InsertUser($id: String!, $name: String!, $email: String!, $profile_photo_url: String = "") {
+  insert_users_one(
+    object: {id: $id, name: $name, email: $email, profile_photo_url: $profile_photo_url}
+  ) {
+    id
+    name
+    email
+    profile_photo_url
+    created_at
+    updated_at
+  }
+}
+    `;
+export type InsertUserMutationFn = Apollo.MutationFunction<InsertUserMutation, InsertUserMutationVariables>;
+
+/**
+ * __useInsertUserMutation__
+ *
+ * To run a mutation, you first call `useInsertUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useInsertUserMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [insertUserMutation, { data, loading, error }] = useInsertUserMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      name: // value for 'name'
+ *      email: // value for 'email'
+ *      profile_photo_url: // value for 'profile_photo_url'
+ *   },
+ * });
+ */
+export function useInsertUserMutation(baseOptions?: Apollo.MutationHookOptions<InsertUserMutation, InsertUserMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<InsertUserMutation, InsertUserMutationVariables>(InsertUserDocument, options);
+      }
+export type InsertUserMutationHookResult = ReturnType<typeof useInsertUserMutation>;
+export type InsertUserMutationResult = Apollo.MutationResult<InsertUserMutation>;
+export type InsertUserMutationOptions = Apollo.BaseMutationOptions<InsertUserMutation, InsertUserMutationVariables>;
 export const UserByIdDocument = gql`
     query UserById($id: String!) {
   users_by_pk(id: $id) {
