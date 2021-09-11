@@ -6,7 +6,7 @@ export type FireLoginType = {
   password: string;
 };
 export const login = ({ email, password }: FireLoginType) => {
-  fireAuth.signInWithEmailAndPassword(email, password);
+  return fireAuth.signInWithEmailAndPassword(email, password);
 };
 
 // signup
@@ -15,7 +15,7 @@ export type FireSignupType = {
   password: string;
 };
 export const signup = ({ email, password }: FireSignupType) => {
-  fireAuth.createUserWithEmailAndPassword(email, password);
+  return fireAuth.createUserWithEmailAndPassword(email, password);
 };
 
 //signout
