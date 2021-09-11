@@ -1,4 +1,5 @@
-import { useSetRecoilState } from 'recoil';
+import { checkAuthToken } from "./checkAuthToken";
+import { useSetRecoilState } from "recoil";
 import { useEffect } from "react";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
@@ -8,7 +9,7 @@ import {
 } from "../../../utils/Firebase/auth";
 import { useInsertUserMutation } from "../../../utils/graphql/generated";
 import { SetErrorFn, useAuthHelper } from "../useAuthHelper";
-import { GlobalUser } from '../../../stores/User';
+import { GlobalUser } from "../../../stores/User";
 
 export type SignupPropsType = {
   name: string;
@@ -51,6 +52,8 @@ export const useSignup = () => {
     if (!user?.uid) {
       throw new Error("ユーザーの登録に失敗しました。");
     }
+
+    await checkAuthToken(user.uid);
 
     const apolloResponse = await insertMutation({
       variables: {
