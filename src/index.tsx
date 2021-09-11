@@ -9,6 +9,10 @@ import { ApolloProvider, ApolloClient, createHttpLink, InMemoryCache } from "@ap
 import { setContext } from "@apollo/client/link/context";
 
 import { RecoilRoot } from "recoil";
+import { AuthStateListener } from "./providers/AuthStateListener";
+import { GlobalAccout } from "./providers/GlobalAccount";
+
+
 
 
 const theme = createTheme();
@@ -42,11 +46,15 @@ ReactDOM.render(
     <RecoilRoot>
       <ThemeProvider theme={theme}>
         <ApolloProvider client={apolloClient}>
-          <BrowserRouter>
-            <CssBaseline />
-            <GlobalStyle />
-            <RootRouter />
-          </BrowserRouter>
+          <AuthStateListener>
+            <GlobalAccout>
+              <BrowserRouter>
+                <CssBaseline />
+                <GlobalStyle />
+                <RootRouter />
+              </BrowserRouter>
+            </GlobalAccout>
+          </AuthStateListener>
         </ApolloProvider>
     </ThemeProvider>
     </RecoilRoot>
