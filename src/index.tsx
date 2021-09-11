@@ -8,6 +8,8 @@ import { createTheme, CssBaseline, ThemeProvider } from "@material-ui/core";
 import { ApolloProvider, ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 
+import { RecoilRoot } from "recoil";
+
 
 const theme = createTheme();
 
@@ -37,15 +39,17 @@ const apolloClient = new ApolloClient({
 
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
-    <ApolloProvider client={apolloClient}>
-      <BrowserRouter>
-        <CssBaseline />
-        <GlobalStyle />
-        <RootRouter />
-      </BrowserRouter>
-    </ApolloProvider>
+    <RecoilRoot>
+      <ThemeProvider theme={theme}>
+        <ApolloProvider client={apolloClient}>
+          <BrowserRouter>
+            <CssBaseline />
+            <GlobalStyle />
+            <RootRouter />
+          </BrowserRouter>
+        </ApolloProvider>
     </ThemeProvider>
+    </RecoilRoot>
   </React.StrictMode>,
   document.getElementById("root")
 );
